@@ -37,9 +37,7 @@ public class PlayerInput implements IGameUI {
 		GameManager.getGM().getMainFrame().getGroup().getChildren().add(text);
 		updatePosition();
 		
-		GameManager.getGM().getMainFrame().getScene().setOnKeyPressed((e) -> {
-			onKeyPressed(e.getCode());
-		});
+		GameManager.getGM().getMainFrame().getScene().setOnKeyPressed((e) -> onKeyPressed(e.getCode()));
 		
 	}
 	
@@ -50,24 +48,32 @@ public class PlayerInput implements IGameUI {
 	private void onKeyPressed(KeyCode code) {
 		
 		if(code.equals(KeyCode.BACK_SPACE)) {
+			
 			if(text.getText().length() > 0) {
 				text.setText(text.getText().substring(0, text.getText().length()-1));
 			}
+			
 		} else if(Character.isDigit(code.getChar().charAt(0)) || code.isKeypadKey()) {
+			
 			if(Character.isDigit(code.getChar().charAt(0))) {
 				text.setText(text.getText() + code.getChar());
 			} else {
 				text.setText(text.getText() + (char)(code.getChar().charAt(0) - 48));
 			}
+			
 		} else if(code.getChar().charAt(0) == 109) {
+			
 			if(text.getText().length() == 0) {
 				text.setText("-");				
 			}
+			
 		} else if(code.equals(KeyCode.ENTER)) {
+			
 			if(text.getText().length() > 0) {
 				userSubmit.addFirst(Long.parseLong(text.getText()));
 				text.setText("");
 			}
+			
 		}
 		
 		updatePosition();
@@ -95,9 +101,12 @@ public class PlayerInput implements IGameUI {
 	 * Responzivne updatne poziciu UI elementu
 	 */
 	private void updatePosition() {
+		
 		bounds = text.getLayoutBounds();
+		
 		text.setLayoutX(GameManager.getGM().getMainFrame().getScene().getWidth()/2-bounds.getWidth()/2);
 		text.setLayoutY(GameManager.getGM().getMainFrame().getScene().getHeight()-40);
+		
 	}
 	
 	/**

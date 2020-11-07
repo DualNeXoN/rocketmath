@@ -21,20 +21,18 @@ public class MathProblemBlink extends MathProblem {
 	
 	@Override
 	protected void generatePosition() {
+		
 		x = MathFunc.getRandomInRange(140, (int)(GameManager.getGM().getMainFrame().getScene().getWidth()-40-getWidth()));
-		y = -getHeight();
+		y = MathFunc.getRandomInRange(30, (int)(GameManager.getGM().getMainFrame().getScene().getHeight()-40-getHeight()));
+		
 		setLayoutX(x);
 		setLayoutY(y);
+		
 	}
 	
 	@Override
 	public void tick() {
-		y += speed;
-		setLayoutY(y);
-		if(y > GameManager.getGM().getMainFrame().getScene().getHeight()) {
-			GameManager.getGM().getPlayer().decHealth(1);
-			setToDestroy();
-		}
+		//Dokoncit
 	}
 	
 }

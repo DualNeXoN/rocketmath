@@ -12,11 +12,13 @@ public abstract class GameThread extends Thread {
 	 * @param millis - Milisekundy
 	 */
 	protected void sleepNow(long millis) {
+		
 		try {
 			Thread.sleep(millis);
 		} catch (InterruptedException e) {
 			System.out.println("Waking up thread " + getClass().getSimpleName());
 		}
+		
 	}
 	
 	/**

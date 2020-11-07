@@ -69,25 +69,37 @@ public class TGameLoop extends GameThread {
 	 * Spracovanie odpovedi hraca
 	 */
 	private void checkPlayerInput() {
+		
 		if(UIHandler.get().game().getPlayerInput().hasSubmit()) {
+			
 			boolean correct = false;
 			long submit = UIHandler.get().game().getPlayerInput().getSubmit();
+			
 			Iterator<GameObject> i = gm.getGameRoom().getObjects().iterator();
 			while(i.hasNext()) {
+				
 				GameObject obj = i.next();
+				
 				if(obj instanceof MathProblem) {
+					
 					MathProblem mathProblem = (MathProblem) obj;
+					
 					if(mathProblem.getProblemSolved() == submit) {
 						gm.getGameRoom().removeObject(mathProblem);
 						correct = true;
 						break;
 					}
+					
 				}
+				
 			}
+			
 			if(!correct) {
 				gm.getPlayer().decHealth(1);
 			}
+			
 		}
+		
 	}
 	
 	/**
@@ -111,7 +123,7 @@ public class TGameLoop extends GameThread {
 	}
 	
 	/**
-	 * Znici objekty, ktore maju vlajku znicenia nastavenu na FALSE
+	 * Znici objekty, ktore maju vlajku znicenia nastavenu na TRUE
 	 */
 	private void destroyObjects() {
 		

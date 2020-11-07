@@ -30,12 +30,17 @@ public class UIHandler {
 		instance = this;
 		
 		switch(state) {
+		
 		case GAME_ROOM:
+			
 			game = new UIGame();
 			break;
+			
 		case MAIN_MENU:
+			
 			mainMenu = new UIMainMenu();
 			break;
+			
 		}
 		
 	}
@@ -49,7 +54,7 @@ public class UIHandler {
 	}
 	
 	/**
-	 * Podtrieda pr pracu s UI na hernej ploche
+	 * Podtrieda pre pracu s UI na hernej ploche
 	 * @author DualNexon
 	 *
 	 */
@@ -98,6 +103,11 @@ public class UIHandler {
 		
 	}
 	
+	/**
+	 * Podtrieda pre pracu s UI na hlavnom menu
+	 * @author DualNexon
+	 *
+	 */
 	public class UIMainMenu implements IGameUI {
 		
 		/**

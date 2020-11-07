@@ -125,9 +125,7 @@ public class Sprite extends Canvas {
 	public void setUpdateInMillis(int updateInMillis) {
 		this.updateInMillis = updateInMillis;
 		stopAnimation();
-		animation = new Timeline(new KeyFrame(Duration.millis(updateInMillis), e -> {
-			update();
-		}));
+		animation = new Timeline(new KeyFrame(Duration.millis(updateInMillis), e -> update()));
 		animation.setCycleCount(Timeline.INDEFINITE);
 		playAnimation();
 		
