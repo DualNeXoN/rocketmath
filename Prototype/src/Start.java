@@ -11,7 +11,7 @@ import me.dualnexon.rocketmath.GlobalOptions;
 public class Start extends Application {
 	
 	/**
-	 * Main metoda vykonana hneï po spusteni do aplikacie
+	 * Main metoda vykonana hned po spusteni do aplikacie
 	 * @param args - spustacie argumenty
 	 */
 	public static void main(String[] args) {
