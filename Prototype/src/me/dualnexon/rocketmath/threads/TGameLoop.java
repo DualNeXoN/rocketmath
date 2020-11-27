@@ -28,7 +28,7 @@ public class TGameLoop extends GameThread {
 		this.gameTickSleep = 1000 / GlobalOptions.getGameTick();
 		setDaemon(true);
 		
-		spawner = new TSpawner(2000);
+		spawner = new TSpawner(1000);
 		
 		gm.setGameRunning(true);
 		start();

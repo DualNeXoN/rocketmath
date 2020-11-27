@@ -38,9 +38,9 @@ public class TSpawner extends GameThread {
 				@Override
 				public void run() {
 					
-					int r = MathFunc.getRandomInRange(1, 4);
 					
-					if(r < 4) gm.getGameRoom().addObject(new MathProblemFalling());
+					
+					if(MathFunc.getRandomInRange(1, 4) < 4) gm.getGameRoom().addObject(new MathProblemFalling());
 					else gm.getGameRoom().addObject(new MathProblemBlink());
 					
 				}
