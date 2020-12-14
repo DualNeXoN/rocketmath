@@ -35,12 +35,9 @@ public class Frame {
 		File iconPath = new File("assets" + File.separator + "icon.png");
 		stage.getIcons().add(new Image(iconPath.toURI().toString()));
 		
-		scene = new Scene(new Group(), GlobalOptions.getWindowWidth(), GlobalOptions.getWindowHeight());
 		
+		setGroup(new Group());
 		scene.setFill(Color.rgb(164, 164, 164));
-		
-		stage.setScene(scene);
-		
 		
 	}
 	
@@ -92,6 +89,11 @@ public class Frame {
 	 */
 	public Group getGroup() {
 		return (Group) scene.getRoot();
+	}
+	
+	public void setGroup(Group group) {
+		scene = new Scene(group, GlobalOptions.getWindowWidth(), GlobalOptions.getWindowHeight());
+		stage.setScene(scene);
 	}
 	
 }

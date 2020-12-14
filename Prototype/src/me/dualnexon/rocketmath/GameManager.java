@@ -1,5 +1,7 @@
 package me.dualnexon.rocketmath;
 
+import javafx.scene.Group;
+import me.dualnexon.rocketmath.objects.MathProblem;
 import me.dualnexon.rocketmath.threads.TGameLoop;
 import me.dualnexon.rocketmath.ui.UIHandler;
 
@@ -32,6 +34,9 @@ public class GameManager {
 	private boolean gameRunning = false;
 	private GameRoom gameRoom;
 	private Player player;
+	private TimeLeft timeLeft;
+	private Score score;
+	private EDifficulty gameDifficulty;
 	
 	/**
 	 * Konstruktor ulozi vlastnu instanciu do statickej premennej a vytvori instanciu objektu Frame. Nasledne spusti hru
@@ -44,17 +49,29 @@ public class GameManager {
 			mainFrame.show(true);
 		}
 		
-		runGame();
+		mainMenu();
 		
+	}
+	
+	public void mainMenu() {
+		mainFrame.setGroup(new Group());
+		new Menu();
 	}
 	
 	/**
 	 * Vykona vsetko potrebne pre spustenie hlavneho cyklu hry
 	 */
-	private void runGame() {
+	public void runGame(EDifficulty difficulty) {
+		
+		mainFrame.setGroup(new Group());
+		MathProblem.setMaxSpeed(difficulty.maxSpeed);
+		
+		gameDifficulty = difficulty;
 		
 		gameRoom = new GameRoom(mainFrame.getGroup());
-		constructGame();		
+		score = new Score();
+		constructGame();
+		timeLeft = new TimeLeft(difficulty.time);
 		new TGameLoop();
 		
 	}
@@ -63,8 +80,12 @@ public class GameManager {
 	 * Vytvori hraca a inicializuje stream pre vstup z klavesnice
 	 */
 	private void constructGame() {
-		player = new Player();
+		player = new Player(gameDifficulty.lives);
 		new UIHandler(EGameState.GAME_ROOM);
+	}
+	
+	public EDifficulty getGameDifficulty() {
+		return gameDifficulty;
 	}
 	
 	/**
@@ -73,6 +94,10 @@ public class GameManager {
 	 */
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public Score getScore() {
+		return score;
 	}
 	
 	/**
@@ -89,6 +114,10 @@ public class GameManager {
 	 */
 	public GameRoom getGameRoom() {
 		return gameRoom;
+	}
+	
+	public TimeLeft getTimeLeft() {
+		return timeLeft;
 	}
 	
 	/**

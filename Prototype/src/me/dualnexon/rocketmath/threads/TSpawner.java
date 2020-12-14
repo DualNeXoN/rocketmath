@@ -3,7 +3,8 @@ package me.dualnexon.rocketmath.threads;
 import javafx.application.Platform;
 import me.dualnexon.rocketmath.GameManager;
 import me.dualnexon.rocketmath.MathFunc;
-import me.dualnexon.rocketmath.objects.MathProblemBlink;
+import me.dualnexon.rocketmath.objects.MathProblemPowerUp;
+import me.dualnexon.rocketmath.objects.MathProblem;
 import me.dualnexon.rocketmath.objects.MathProblemFalling;
 
 /**
@@ -38,10 +39,11 @@ public class TSpawner extends GameThread {
 				@Override
 				public void run() {
 					
+					if(MathProblemFalling.getFreezeSpeed() <= MathProblem.getMaxSpeed()/2)
+						gm.getGameRoom().addObject(new MathProblemFalling());
 					
-					
-					if(MathFunc.getRandomInRange(1, 4) < 4) gm.getGameRoom().addObject(new MathProblemFalling());
-					else gm.getGameRoom().addObject(new MathProblemBlink());
+					if(MathFunc.getRandomInRange(1, 100) < 29)
+						gm.getGameRoom().addObject(new MathProblemPowerUp());
 					
 				}
 			});

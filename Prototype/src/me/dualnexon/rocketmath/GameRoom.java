@@ -83,4 +83,12 @@ public class GameRoom {
 		return count;
 	}
 	
+	public void removeAllObjects() {
+		
+		for(int index = objects.size()-1; index >= 0; index--) {
+			objects.get(index).destroy();
+		}
+		
+	}
+	
 }

@@ -62,6 +62,8 @@ public class UIHandler {
 		
 		private UIBackground uiBackground;
 		private UIHealth uiHealth;
+		private UITimeLeft uiTimeLeft;
+		private UIScore uiScore;
 		private PlayerInput playerInput;
 		
 		/**
@@ -70,6 +72,8 @@ public class UIHandler {
 		public UIGame() {
 			uiBackground = new UIBackground();
 			uiHealth = new UIHealth();
+			uiTimeLeft = new UITimeLeft();
+			uiScore = new UIScore();
 			playerInput = new PlayerInput();
 		}
 		
@@ -80,6 +84,8 @@ public class UIHandler {
 		public void updateUI() {
 			uiBackground.updateUI();
 			uiHealth.updateUI();
+			uiTimeLeft.updateUI();
+			uiScore.updateUI();
 			playerInput.updateUI();
 		}
 		
@@ -98,6 +104,8 @@ public class UIHandler {
 		public void destroyUI() {
 			uiBackground.destroyUI();
 			uiHealth.destroyUI();
+			uiTimeLeft.destroyUI();
+			uiScore.destroyUI();
 			playerInput.destroyUI();
 		}
 		

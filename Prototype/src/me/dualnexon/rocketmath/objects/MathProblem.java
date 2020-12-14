@@ -6,6 +6,7 @@ import javafx.geometry.Bounds;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import me.dualnexon.rocketmath.EDifficulty;
 import me.dualnexon.rocketmath.ProblemGenerator;
 
 /**
@@ -15,9 +16,19 @@ import me.dualnexon.rocketmath.ProblemGenerator;
  */
 public abstract class MathProblem extends GameObject {
 	
+	private static double maxSpeed = EDifficulty.MEDIUM.maxSpeed;
+	
+	public static double getMaxSpeed() {
+		return maxSpeed;
+	}
+	
+	public static void setMaxSpeed(double maxSpeed) {
+		MathProblem.maxSpeed = maxSpeed;
+	}
+	
 	protected String problem;
 	protected long solved;
-	protected double speed = 1.5;
+	protected double speed = MathProblem.maxSpeed;
 	
 	/**
 	 * Konstruktor vypocita z parametru matematicky priklad, vytvori a vyrenderuje grafiku objektu, responzivne si zvoli rozmery a vygeneruje nahodnu polohu na osi X

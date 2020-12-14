@@ -26,4 +26,8 @@ public abstract class MathFunc {
         return new Random().nextInt((max - min) + 1) + min;
     }
 	
+	public static double getPercentage(int max, int current) {
+		return (current / (double)max) * 100;
+	}
+	
 }

@@ -3,10 +3,14 @@ package me.dualnexon.rocketmath.threads;
 import java.util.Iterator;
 
 import javafx.application.Platform;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import me.dualnexon.rocketmath.GameManager;
 import me.dualnexon.rocketmath.GlobalOptions;
 import me.dualnexon.rocketmath.objects.GameObject;
 import me.dualnexon.rocketmath.objects.MathProblem;
+import me.dualnexon.rocketmath.objects.MathProblemFalling;
 import me.dualnexon.rocketmath.ui.UIHandler;
 
 /**
@@ -28,7 +32,7 @@ public class TGameLoop extends GameThread {
 		this.gameTickSleep = 1000 / GlobalOptions.getGameTick();
 		setDaemon(true);
 		
-		spawner = new TSpawner(1000);
+		spawner = new TSpawner(gm.getGameDifficulty().spawnTime);
 		
 		gm.setGameRunning(true);
 		start();
@@ -42,7 +46,7 @@ public class TGameLoop extends GameThread {
 	public void run() {
 		
 		while(gm.getGameRunning()) {
-			Platform.runLater(new Runnable() {			
+			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
 					checkPlayerInput();
@@ -53,6 +57,7 @@ public class TGameLoop extends GameThread {
 				}
 			});
 			sleepNow(gameTickSleep);
+			MathProblemFalling.decFreezeSpeed(gm.getGameDifficulty().recoveryFactor);
 		}
 		
 		try {
@@ -61,6 +66,26 @@ public class TGameLoop extends GameThread {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+				gm.getTimeLeft().destroy();
+				gm.getGameRoom().removeAllObjects();
+				Text gameOverText = new Text("Koniec hry! Tvoje skóre je: " + gm.getScore().get());
+				gm.getMainFrame().getGroup().getChildren().add(gameOverText);
+				gameOverText.setFont(new Font(64));
+				gameOverText.setStroke(Color.BLACK);
+				gameOverText.setFill(Color.WHITE);
+				gameOverText.setStrokeWidth(1.5);
+				gameOverText.setLayoutX(gm.getMainFrame().getScene().getWidth()/2 - gameOverText.getBoundsInLocal().getWidth()/2);
+				gameOverText.setLayoutY(gm.getMainFrame().getScene().getHeight()/2 - gameOverText.getBoundsInLocal().getHeight()/2);
+				gameOverText.toFront();
+				gm.getMainFrame().getScene().setOnKeyReleased((e) -> {
+					gm.mainMenu();
+				});
+			}
+		});
 		
 		stopMessage();
 	}
@@ -85,7 +110,8 @@ public class TGameLoop extends GameThread {
 					MathProblem mathProblem = (MathProblem) obj;
 					
 					if(mathProblem.getProblemSolved() == submit) {
-						gm.getGameRoom().removeObject(mathProblem);
+						mathProblem.setToDestroy();
+						if(mathProblem instanceof MathProblemFalling) gm.getScore().inc();
 						correct = true;
 						break;
 					}

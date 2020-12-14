@@ -16,7 +16,7 @@ import javafx.util.Duration;
  */
 public class Sprite extends Canvas {
 	
-	private static final String ROOT_PATH = System.getProperty("user.dir") + File.separator + "assets" + File.separator;
+	public static final String ROOT_PATH = System.getProperty("user.dir") + File.separator + "assets" + File.separator;
 	
 	private GraphicsContext g2d;
 	private Timeline animation;
